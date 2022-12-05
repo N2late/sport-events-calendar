@@ -1,6 +1,14 @@
 import { css } from '@emotion/react';
 
 export const homeStyles = {
-  container: css``,
-  main: css``,
+  main: css`
+    width: 100%;
+    padding: 1rem 1rem;
+  `,
+  addEventContainer: css`
+    width: 100%;
+  `,
+  eventsListContainer: css`
+    width: 100%;
+  `,
 };

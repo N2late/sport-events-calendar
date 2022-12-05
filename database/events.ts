@@ -25,7 +25,7 @@ export async function getAllEvents() {
       events.id,
       events.date,
       events.time,
-      sports.name AS sport,
+      sports.name AS sport_name,
       home_team.name AS home_team,
       away_team.name AS away_team
     FROM events

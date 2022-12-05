@@ -39,19 +39,19 @@ export async function up(sql) {
       ('Portland Trail Blazers', 2),
       ('Utah Jazz', 2),
       ('Golden State Warriors', 2),
-      ('BEMER PIONEERS VORARLBERG', 3),
-      ('EC IDM HEAT PUMPS VSV', 3),
-      ('EC RED BULL SALZBURG', 3),
-      ('EC-KAC', 3),
-      ('HC PUSTERTAL WOLVES', 3),
-      ('HC TIWAG INNSBRUCK - THE SHARKS', 3),
-      ('HCB SOUTH TYROL ALPERIA', 3),
-      ('HK SZ OLIMPIJA', 3),
-      ('HYDRO FEHERVAR AV19', 3),
-      ('MIGROSS SUPERMERCATI ASIAGO', 3),
-      ('MOSER MEDICAL GRAZ99ERS', 3),
-      ('SPUSU VIENNA CAPITALS', 3),
-      ('STEINBACH BLACK WINGS LINZ', 3)
+      ('Bemer Pioneers Vorarlberg', 3),
+      ('ec Idm Heat Pumps Vsv', 3),
+      ('ec Red Bull Salzburg', 3),
+      ('ec-kac', 3),
+      ('hc Pustertal Wolves', 3),
+      ('hc Tiwag Innsbruck - The Sharks', 3),
+      ('hcb South Tyrol Alperia', 3),
+      ('hk Sz Olimpija', 3),
+      ('Hydro Fehervar Av19', 3),
+      ('Migross Supermercati Asiago', 3),
+      ('Moser Medical Graz99ers', 3),
+      ('Spusu Vienna Capitals', 3),
+      ('Steinbach Black Wings Linz', 3)
   `;
 }
 
