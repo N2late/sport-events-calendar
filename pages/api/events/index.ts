@@ -12,8 +12,7 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     // Process a POST request
-    const { date, time, _sport_id, _home_team_id, _away_team_id } =
-      req.body.event;
+    const { date, time, sportId, homeTeamId, awayTeamId } = req.body.eventData;
 
     /* Checking if the required fields are filled out. */
     switch (true) {
@@ -23,13 +22,13 @@ export default async function handler(
       case !time:
         res.status(400).json({ error: 'Time is required' });
         break;
-      case !_sport_id:
+      case !sportId:
         res.status(400).json({ error: 'Sport is required' });
         break;
-      case !_home_team_id:
+      case !homeTeamId:
         res.status(400).json({ error: 'Home team is required' });
         break;
-      case !_away_team_id:
+      case !awayTeamId:
         res.status(400).json({ error: 'Away team is required' });
         break;
     }
@@ -38,9 +37,9 @@ export default async function handler(
     const newEvent = await createEvent(
       date,
       time,
-      _sport_id,
-      _home_team_id,
-      _away_team_id,
+      sportId,
+      homeTeamId,
+      awayTeamId,
     );
 
     /* Checking if the event was created. */
@@ -49,7 +48,7 @@ export default async function handler(
         .status(500)
         .json({ error: 'Something went wrong. Try again, please.' });
     }
-
+    console.log('here', newEvent);
     /* Sending the new event back to the client. */
     res.status(200).json({ event: newEvent });
   }

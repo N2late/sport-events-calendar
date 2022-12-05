@@ -8,8 +8,9 @@ export default async function handler(
 ) {
   // get all teams based on the sport id
   if (req.method === 'GET') {
-    const { id } = req.query;
-    const teams = await getTeamsBySportId(Number(id));
+    const { sportId } = req.query;
+
+    const teams = await getTeamsBySportId(Number(sportId));
     if (teams.length === 0) {
       res.status(404).json({ error: 'There are no teams' });
     }
