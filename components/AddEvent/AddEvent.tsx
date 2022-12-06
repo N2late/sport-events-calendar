@@ -1,14 +1,14 @@
 import Image from 'next/image';
 import { FormEvent, useState } from 'react';
 import { addEventStyles } from '../../styles/addEvent';
-import { FormEventData } from '../../utils/types';
+import { Event, FormEventData } from '../../utils/types';
 import { useMultiStepForm } from '../../utils/useMultistepForm';
 import { EventDateTime } from './EventDateTime';
 import SelectTeams from './SelectTeams';
 import SportPick from './SportPick';
 
 type AddEventProps = {
-  setEventList: (events: Event[]) => void;
+  updateEventList: (event: Event) => void;
 };
 
 const initialFormState: FormEventData = {
@@ -19,7 +19,7 @@ const initialFormState: FormEventData = {
   awayTeamId: 0,
 };
 
-function AddEvent({ setEventList }: AddEventProps) {
+function AddEvent({ updateEventList }: AddEventProps) {
   const [formState, setFormState] = useState(initialFormState);
 
   /**
@@ -47,7 +47,6 @@ function AddEvent({ setEventList }: AddEventProps) {
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (!isLastStep) return nextStep();
-    console.log(formState);
     const res = await fetch('/api/events', {
       method: 'POST',
       headers: {
@@ -55,10 +54,11 @@ function AddEvent({ setEventList }: AddEventProps) {
       },
       body: JSON.stringify({ eventData: formState }),
     });
-    const event = await res.json();
+    const { event } = await res.json();
     if (res.ok) {
       alert('Successful Event Creation');
       setAddEvent(false);
+      updateEventList(event);
       setFormState(initialFormState);
       setCurrentStepIndex(0);
     } else {

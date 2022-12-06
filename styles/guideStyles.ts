@@ -3,7 +3,6 @@ export const guideStyles = {
   colors: {
     primary: '#12215C',
     secondary: '#D9F0FF',
-    ternary: '#D9F0FF',
     bright: '#fff',
   },
   fontSizes: {
