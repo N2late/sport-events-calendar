@@ -21,7 +21,7 @@ export const addEventStyles = {
     font-size: ${guideStyles.fontSizes.large};
     color: ${guideStyles.colors.primary};
     font-weight: 700;
-    background-color: ${guideStyles.colors.ternary};
+    background-color: ${guideStyles.colors.secondary};
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     :hover {
@@ -34,7 +34,7 @@ export const addEventStyles = {
   `,
   formContainer: css`
     position: relative;
-    background: ${guideStyles.colors.ternary};
+    background: ${guideStyles.colors.secondary};
     border: 1px solid ${guideStyles.colors.primary};
     padding: 2rem;
     margin: 1rem;

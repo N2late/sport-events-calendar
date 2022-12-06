@@ -48,9 +48,9 @@ export default async function handler(
         .status(500)
         .json({ error: 'Something went wrong. Try again, please.' });
     }
-    console.log('here', newEvent);
+
     /* Sending the new event back to the client. */
-    res.status(200).json({ event: newEvent });
+    return res.status(200).json({ event: newEvent });
   }
   if (req.method === 'GET') {
     // Process a GET request
@@ -60,7 +60,7 @@ export default async function handler(
       res.status(404).json({ error: 'No events found' });
     }
 
-    res.status(200).json({ events: allEvents });
+    return res.status(200).json({ events: allEvents });
   }
 
   if (req.method === 'DELETE') {

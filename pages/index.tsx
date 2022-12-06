@@ -1,24 +1,53 @@
 import Head from 'next/head';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import AddEvent from '../components/AddEvent/AddEvent';
 import EventsList from '../components/EventsList';
+import { getAllEvents } from '../database/events';
+import { getAllSports } from '../database/sports';
 import { homeStyles } from '../styles/home';
+import { Event, Sport } from '../utils/types';
 
-export default function Home() {
-  const [eventList, setEventList] = useState<Event[]>([]);
+type Props = {
+  events: Event[];
+  sports: Sport[];
+};
 
+export default function Home({ events, sports }: Props) {
+  const [eventList, setEventList] = useState<Event[]>(events);
+  const [filteredEvents, setFilteredEvents] = useState<Event[]>(eventList);
+  const [filter, setFilter] = useState('all');
+
+  /**
+   * It takes an event, adds it to the event list, sorts the event list by date and time, filters the
+   * event list by the filter, and sets the filtered events to the event list
+   * @param {Event} event - Event - this is the event that is being added to the list
+   */
   const updateEventList = (event: Event) => {
-    setEventList((prevState) => [...prevState, event]);
+    const newEventList = [...eventList, event];
+    newEventList.sort(
+      (a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time),
+    );
+    setEventList(
+      newEventList.filter((event) =>
+        event.sportName?.toLocaleLowerCase().includes(filter),
+      ),
+    );
+    setFilteredEvents(newEventList);
   };
 
-  useEffect(() => {
-    fetch('/api/events')
-      .then((res) => res.json())
-      .then((events) => setEventList(events.events));
-  }, []);
-
-  console.log(eventList);
+  const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newFilter = e.currentTarget.value;
+    setFilter(newFilter);
+    if (newFilter === 'All') {
+      setFilteredEvents(eventList);
+    } else {
+      setFilteredEvents(
+        eventList.filter((event) =>
+          event.sportName?.toLowerCase().includes(newFilter.toLowerCase()),
+        ),
+      );
+    }
+  };
 
   return (
     <div>
@@ -30,15 +59,38 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main css={homeStyles.main}>
         <div css={homeStyles.addEventContainer}>
-          <AddEvent setEventList={setEventList} />
+          <AddEvent updateEventList={updateEventList} />
         </div>
         <div css={homeStyles.eventsListContainer}>
-          <EventsList events={eventList} />
+          <EventsList
+            events={filteredEvents}
+            sports={sports}
+            handleFilter={handleFilter}
+          />
         </div>
       </main>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const events = await getAllEvents();
+  const sports = await getAllSports();
+
+  if (!events) {
+    return {
+      props: {
+        events: [],
+        sports: [],
+      },
+    };
+  }
+  return {
+    props: {
+      events: JSON.parse(JSON.stringify(events)),
+      sports,
+    },
+  };
 }
