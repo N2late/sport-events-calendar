@@ -1,6 +1,9 @@
 import { Event } from '../utils/types';
 import { sql } from './connect';
 
+/**
+ * It takes in 5 parameters, inserts them into the database and returns the newly created event with sport name and team names.
+ */
 export async function createEvent(
   date: string,
   time: string,
@@ -15,6 +18,7 @@ export async function createEvent(
       (${date}, ${time}, ${_sport_id}, ${_home_team_id}, ${_away_team_id})
     RETURNING *;
   `;
+  /* Getting the newly created event from the database with sport and teams names. */
   const event = await getEventById(newEvent.id);
   return event;
 }
@@ -38,6 +42,7 @@ export async function getAllEvents() {
   return allEvents;
 }
 
+// this function is used to get all events for a specific sport. It is used in the unit testing.
 export async function getEventsBySportId(sport_id: number) {
   const events = await sql<Event[]>`
     SELECT
@@ -56,6 +61,7 @@ export async function getEventsBySportId(sport_id: number) {
   return events;
 }
 
+// function created for future implementation of deleting a single event
 export async function deleteEventById(id: number) {
   const [event] = await sql<Event[]>`
     DELETE FROM events
@@ -63,7 +69,7 @@ export async function deleteEventById(id: number) {
   `;
   return event;
 }
-
+// function used in unit testing.
 export async function deleteAllEvents() {
   const event = await sql<Event[]>`
     DELETE FROM events
@@ -71,6 +77,7 @@ export async function deleteAllEvents() {
   return event;
 }
 
+// get a single event with sport and teams.
 export async function getEventById(id: number) {
   const [event] = await sql<Event[]>`
     SELECT

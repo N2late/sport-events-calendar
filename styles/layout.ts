@@ -9,6 +9,13 @@ export const layoutStyles = {
     background-color: ${guideStyles.colors.primary};
     display: flex;
     height: 60px;
+    @media screen and (max-width: 600px) {
+      flex-direction: column;
+      height: 100px;
+      padding: 1rem;
+      gap: 0.5rem;
+      width: 100vw;
+    }
   `,
   logoContainer: css`
     display: flex;
@@ -20,6 +27,9 @@ export const layoutStyles = {
     margin-left: 25px;
     display: flex;
     align-items: center;
+    @media screen and (max-width: 600px) {
+      margin-left: 0;
+    }
   `,
   siteName: css`
     color: ${guideStyles.colors.bright};
@@ -32,6 +42,10 @@ export const layoutStyles = {
     align-items: center;
     justify-content: flex-end;
     width: 100%;
+    @media screen and (max-width: 600px) {
+      padding-left: 1rem;
+      justify-content: center;
+    }
   `,
   navList: css`
     display: flex;

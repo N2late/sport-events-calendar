@@ -18,7 +18,7 @@ export function EventDateTime({
   let currDate = new Date();
   /* Getting the timezone offset in minutes. */
   const offset = currDate.getTimezoneOffset();
-  /* Converting the date to UTC. */
+  /* Converting the date to UTC and used to define the min date the user can pick from */
   currDate = new Date(currDate.getTime() - offset * 60 * 1000);
   const currDateStr = currDate.toISOString().split('T')[0];
 

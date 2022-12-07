@@ -30,6 +30,7 @@ function AddEvent({ updateEventList }: AddEventProps) {
     setFormState((prevState) => ({ ...prevState, ...fields }));
   }
 
+  /* Destructuring the return value of the useMultiStepForm hook. */
   const {
     isFirstStep,
     nextStep,

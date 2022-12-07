@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { deleteEventById } from '../../../database/events';
 import { Data } from '../../../utils/types';
 
+/* To be consumed when a delete feature is added to the frontend. */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>,
