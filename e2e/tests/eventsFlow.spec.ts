@@ -8,6 +8,7 @@ test('test', async ({ page }) => {
   await page.getByLabel('Time').click();
   await page.getByLabel('Time').fill('12:30');
   await page.getByRole('button', { name: 'Next' }).click();
+  // selects a football option
   await page.locator('#sport').selectOption('1');
   await page.getByRole('button', { name: 'Next' }).click();
   await page.getByRole('combobox', { name: 'Home Team' }).selectOption('3');
@@ -18,10 +19,10 @@ test('test', async ({ page }) => {
     expect(dialog.message()).toBe('Successful Event Creation');
     dialog.dismiss().catch(() => {});
   });
-  await page.getByText('PortugalFootball2022-12-2412:30England').isVisible();
-  // test that the event is filtered out when the sport is filtered
+  await expect(page.locator('[data-test-id="event-1"]')).toHaveCount(1);
+  // test that the event is filtered out when the sport is filtered by basketball
   await page
     .getByRole('combobox', { name: 'Filter by sport:' })
     .selectOption('Basketball');
-  await page.getByText('PortugalFootball2022-12-2412:30England').isHidden();
+  await expect(page.locator('[data-test-id="event-1"]')).toBeHidden();
 });
