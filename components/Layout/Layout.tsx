@@ -8,7 +8,7 @@ const contentWrap = css`
   display: flex;
   flex-direction: column;
   @media screen and (max-width: 600px) {
-    min-height: 1220px;
+    min-height: 90vh;
   }
 `;
 

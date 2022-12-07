@@ -19,7 +19,7 @@ export async function getSportByName(name: string) {
   return sport;
 }
 
-// get sport by id
+// get sport by id is used in the unit testing
 export async function getSportById(id: number) {
   const [sport] = await sql<Sport[]>`
     SELECT * FROM sports

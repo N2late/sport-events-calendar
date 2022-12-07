@@ -11,9 +11,4 @@ export const guideStyles = {
     medium: '1.5rem',
     large: '2rem',
   },
-  breakpoints: {
-    mobile: '480px',
-    tablet: '768px',
-    desktop: '1024px',
-  },
 };
