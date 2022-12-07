@@ -15,8 +15,7 @@ type Props = {
 export default function Home({ events, sports }: Props) {
   const [eventList, setEventList] = useState<Event[]>(events);
   const [filteredEvents, setFilteredEvents] = useState<Event[]>(eventList);
-  const [filterSport, setFilterSport] = useState('all');
-
+  const [filterSport, setFilterSport] = useState('All');
   /**
    * It takes an event, adds it to the event list, sorts the event list by date and time, filters the
    * event list by the filter, and sets the filtered events to the event list
@@ -39,10 +38,10 @@ export default function Home({ events, sports }: Props) {
   const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newFilter = e.currentTarget.value;
     setFilterSport(newFilter);
-    if (newFilter === 'All') {
-      setFilteredEvents(eventList);
+    if (newFilter === 'all') {
+      return setFilteredEvents(eventList);
     } else {
-      setFilteredEvents(
+      return setFilteredEvents(
         eventList.filter((event) =>
           event.sportName?.toLowerCase().includes(newFilter.toLowerCase()),
         ),
