@@ -51,12 +51,20 @@ type EventItemProps = {
 };
 
 function EventItem({ event }: EventItemProps) {
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+  };
+  const date = new Date(event.date).toLocaleDateString('en-GB', options);
+
   return (
-    <div css={eventsListStyles.event}>
+    <div css={eventsListStyles.event} data-test-id={`event-${event.id}`}>
       <p css={eventsListStyles.teamName}>{event.homeTeam}</p>
       <div css={eventsListStyles.eventInfo}>
         <p>{event.sportName}</p>
-        <p>{event.date.slice(0, 10)}</p>
+        <p>{date}</p>
         <p>{event.time.slice(0, 5)}</p>
       </div>
       <p css={eventsListStyles.teamName}>{event.awayTeam}</p>
