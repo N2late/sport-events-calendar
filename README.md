@@ -53,7 +53,7 @@ yarn
 - Replace the placeholders xxxxx with your username, password and name of the database
 - Install dotenv-cli with yarn add dotenv-cli
 - Run the migrations with yarn migrate up
-- Start the server by running yarn dev
+- Start the server by running yarn dev.
 
 
 
